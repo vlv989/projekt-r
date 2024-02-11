@@ -13,9 +13,11 @@ function AddProducts({ addProductToList }) {
     e.target.name !== "produktSpozywczy"
       ? (value = e.target.value)
       : (value = e.target.checked);
-    setProduct({
-      ...product,
-      [e.target.name]: value,
+    setProduct((prevProduct) => {
+      return {
+        ...prevProduct,
+        [e.target.name]: value,
+      };
     });
   };
 
@@ -64,7 +66,7 @@ function AddProducts({ addProductToList }) {
           />
         </label>
         <button type="submit" disabled={!product.nazwa || !product.kategoria}>
-          Add
+          Add product
         </button>
       </form>
     </div>

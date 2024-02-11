@@ -12,7 +12,10 @@ function App() {
   const [shoppingProducts, setShoppingProducts] = useState([]);
 
   const addProductToCart = (product) => {
-    setShoppingProducts([...shoppingProducts, product]);
+    setShoppingProducts((prevShoppingProducts) => [
+      ...prevShoppingProducts,
+      product,
+    ]);
   };
 
   const removeProductFromCart = (id) => {
@@ -53,7 +56,10 @@ function App() {
     if (modification) {
       setAvailableProducts(listWithModifiedProduct);
     } else {
-      setAvailableProducts([...availableProducts, product]);
+      setAvailableProducts((prevAvailableProducts) => [
+        ...prevAvailableProducts,
+        product,
+      ]);
     }
 
     setFilteredProducts(availableProducts);
@@ -61,19 +67,19 @@ function App() {
 
   return (
     <div className={styles.appWrapper}>
-      <AddProducts addProductToList={addProductToList} />
+      <AddProducts addProductToList={(product) => addProductToList(product)} />
       <ProductsFilters
         products={availableProducts}
-        filterProducts={filterProducts}
+        filterProducts={(data) => filterProducts(data)}
       />
       <div className={styles.columnsWrapper}>
         <ProductsList
           products={filteredProducts}
-          addProductToCart={addProductToCart}
+          addProductToCart={(product) => addProductToCart(product)}
         />
         <ShopingList
           products={shoppingProducts}
-          removeProductFromCart={removeProductFromCart}
+          removeProductFromCart={(id) => removeProductFromCart(id)}
         />
       </div>
     </div>

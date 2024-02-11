@@ -7,7 +7,10 @@ function ShopingList({ products, removeProductFromCart }) {
   const handleCrossedOutProduct = (e, id) => {
     e.preventDefault();
     if (!crossedOutProduct.includes(id)) {
-      setCrossedOutProduct([...crossedOutProduct, id]);
+      setCrossedOutProduct((prevCrossedOutProduct) => [
+        ...prevCrossedOutProduct,
+        id,
+      ]);
     } else {
       setCrossedOutProduct(crossedOutProduct.filter((el) => el !== id));
     }

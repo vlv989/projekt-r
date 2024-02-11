@@ -17,9 +17,19 @@ function ProductsFilters({ products, filterProducts }) {
     e.target.name !== "produktSpozywczy"
       ? (value = e.target.value)
       : (value = e.target.checked);
+    setData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: value,
+      };
+    });
+  };
+
+  const resetFilter = () => {
     setData({
-      ...data,
-      [e.target.name]: value,
+      nazwa: "",
+      kategoria: "All",
+      produktSpozywczy: false,
     });
   };
 
@@ -57,7 +67,7 @@ function ProductsFilters({ products, filterProducts }) {
           </select>
         </label>{" "}
         <label>
-          food products only
+          food only
           <input
             name="produktSpozywczy"
             checked={data.produktSpozywczy}
@@ -65,6 +75,7 @@ function ProductsFilters({ products, filterProducts }) {
             onChange={handleChange}
           />
         </label>
+        <button onClick={resetFilter}>Reset filter</button>
       </form>
     </div>
   );
