@@ -1,0 +1,10 @@
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh);
+}
+
+.columnsWrapper {
+  display: flex;
+  height: calc(100vh);
+}
