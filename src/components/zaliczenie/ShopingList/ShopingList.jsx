@@ -1,9 +1,16 @@
+import { useState } from "react";
 import commonColumnsStyles from "../../../common/styles/Columns.module.scss";
 
 function ShopingList({ products, removeProductFromCart }) {
-  const handleRemoveProduct = (e, id) => {
+  const [crossedOutProduct, setCrossedOutProduct] = useState([]);
+
+  const handleCrossedOutProduct = (e, id) => {
     e.preventDefault();
-    removeProductFromCart(id);
+    if (!crossedOutProduct.includes(id)) {
+      setCrossedOutProduct([...crossedOutProduct, id]);
+    } else {
+      setCrossedOutProduct(crossedOutProduct.filter((el) => el !== id));
+    }
   };
 
   return (
@@ -13,8 +20,14 @@ function ShopingList({ products, removeProductFromCart }) {
         <ul>
           {products.map((el) => (
             <li
+              style={{
+                "text-decoration": `${
+                  crossedOutProduct.includes(el.id) ? "line-through" : "auto"
+                }`,
+              }}
               key={el.id}
-              onContextMenu={(e) => handleRemoveProduct(e, el.id)}
+              onClick={() => removeProductFromCart(el.id)}
+              onContextMenu={(e) => handleCrossedOutProduct(e, el.id)}
             >
               {el.nazwa}
             </li>

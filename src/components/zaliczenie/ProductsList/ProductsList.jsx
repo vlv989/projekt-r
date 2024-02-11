@@ -1,8 +1,7 @@
 import { useState } from "react";
 import commonColumnsStyles from "../../../common/styles/Columns.module.scss";
-import produkty from "../../../common/consts/produkty";
 
-function ProductsList({ addProductToCart }) {
+function ProductsList({ products, addProductToCart }) {
   const [id, setId] = useState(0);
 
   const handleAddProduct = (el) => {
@@ -18,7 +17,7 @@ function ProductsList({ addProductToCart }) {
       <header className={commonColumnsStyles.AppHeader}>
         <p>Products list</p>
         <ul>
-          {produkty.map((el) => (
+          {products.map((el) => (
             <li key={el.nazwa} onClick={() => handleAddProduct(el)}>
               {el.nazwa}
             </li>
