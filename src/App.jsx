@@ -4,8 +4,10 @@ import AddProducts from "./components/zaliczenie/AddProducts/AddProducts";
 import ProductsFilters from "./components/zaliczenie/ProductsFilters/ProductsFilters";
 import ProductsList from "./components/zaliczenie/ProductsList/ProductsList";
 import ShopingList from "./components/zaliczenie/ShopingList/ShopingList";
+import produkty from "./common/consts/produkty";
 
 function App() {
+  const [filteredProducts, setFilteredProducts] = useState(produkty);
   const [shoppingProducts, setShoppingProducts] = useState([]);
 
   const addProductToCart = (product) => {
@@ -16,12 +18,27 @@ function App() {
     setShoppingProducts(shoppingProducts.filter((el) => el.id !== id));
   };
 
+  const filterProducts = (data) => {
+    let filterByData = produkty.filter((el) => el.nazwa.startsWith(data.nazwa));
+
+    setFilteredProducts(
+      data.kategoria === "All"
+        ? filterByData
+        : filterByData.filter(
+            (el) => el.kategoria.toLowerCase() === data.kategoria
+          )
+    );
+  };
+
   return (
     <div className={styles.appWrapper}>
       <AddProducts />
-      <ProductsFilters />
+      <ProductsFilters filterProducts={filterProducts} />
       <div className={styles.columnsWrapper}>
-        <ProductsList addProductToCart={addProductToCart} />
+        <ProductsList
+          products={filteredProducts}
+          addProductToCart={addProductToCart}
+        />
         <ShopingList
           products={shoppingProducts}
           removeProductFromCart={removeProductFromCart}
