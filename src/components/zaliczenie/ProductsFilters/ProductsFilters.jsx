@@ -10,9 +10,11 @@ function ProductsFilters({ filterProducts }) {
   });
 
   const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
+    setData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: e.target.value,
+      };
     });
   };
 
