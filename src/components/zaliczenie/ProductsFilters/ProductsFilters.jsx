@@ -18,9 +18,11 @@ function ProductsFilters({ filterProducts }) {
     e.target.name !== "produktSpozywczy"
       ? (value = e.target.value)
       : (value = e.target.checked);
-    setData({
-      ...data,
-      [e.target.name]: value,
+    setData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: value,
+      };
     });
   };
 

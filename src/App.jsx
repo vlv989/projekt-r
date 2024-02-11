@@ -11,7 +11,10 @@ function App() {
   const [shoppingProducts, setShoppingProducts] = useState([]);
 
   const addProductToCart = (product) => {
-    setShoppingProducts([...shoppingProducts, product]);
+    setShoppingProducts((prevShoppingProducts) => [
+      ...prevShoppingProducts,
+      product,
+    ]);
   };
 
   const removeProductFromCart = (id) => {
@@ -37,15 +40,15 @@ function App() {
   return (
     <div className={styles.appWrapper}>
       <AddProducts />
-      <ProductsFilters filterProducts={filterProducts} />
+      <ProductsFilters filterProducts={(data) => filterProducts(data)} />
       <div className={styles.columnsWrapper}>
         <ProductsList
           products={filteredProducts}
-          addProductToCart={addProductToCart}
+          addProductToCart={(product) => addProductToCart(product)}
         />
         <ShopingList
           products={shoppingProducts}
-          removeProductFromCart={removeProductFromCart}
+          removeProductFromCart={(id) => removeProductFromCart(id)}
         />
       </div>
     </div>
