@@ -35,7 +35,7 @@ function ProductsFilters({ products, filterProducts }) {
 
   return (
     <div className={styles.Headers}>
-      <p>Products Filters:</p>
+      <span>Products Filters:</span>
       <form>
         <label>
           by name{" "}
@@ -75,7 +75,9 @@ function ProductsFilters({ products, filterProducts }) {
             onChange={handleChange}
           />
         </label>
-        <button onClick={resetFilter}>Reset filter</button>
+        <button type="button" onClick={resetFilter}>
+          Reset filter
+        </button>
       </form>
     </div>
   );

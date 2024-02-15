@@ -34,7 +34,7 @@ function AddProducts({ addProductToList }) {
 
   return (
     <div className={styles.Headers}>
-      <p>Add products:</p>
+      <span>Add products:</span>
       <form onSubmit={handleSubmit}>
         <label>
           name{" "}
